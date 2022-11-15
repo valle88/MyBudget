@@ -7,7 +7,7 @@ const Movimientos = ({productName, onProductRemove}) => {
     <View  style={styles.listItem} >
       <Pressable onPress={()=> onProductRemove(productName)}>
       </Pressable>
-      <Text style={styles.productName}>{productName}</Text>
+      <Text style={styles.productName}>{Comprobacion}</Text>
     </View>
 
    
