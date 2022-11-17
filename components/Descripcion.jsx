@@ -1,33 +1,37 @@
 import React, { useState } from 'react';
-import { StyleSheet, Button, TextInput, View } from 'react-native';
+import { StyleSheet, Button, TextInput, View, Text } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
+import ModalCalendar from './ModalCalendar';
 
-const Descripcion = () => {
+const Descripcion = ({onSalary}) => {
     const TYPES = ["Gastos", "Ingreso"];
 
+
+
     return (
-        <View >
-            <View style={styles.direccion}>
+        <View  style= {styles.borde}>
+            <View style={styles.borrar}>
                 <TextInput placeholder='Concepto' />
                 <TextInput placeholder='Importe' />
+
+            </View>
+            <View style={styles.direccion}>
+                <SelectDropdown
+                    
+                    data={TYPES}
+                    onSelect={(selectItem, index) => {
+                        console.log(selectItem, index)
+                    }}
+                    defaultButtonText={'Movimiento'}
+                />
+                  <ModalCalendar />
+            </View>
+            
+            <View>
                 <Button
                     title="Añadir"
                 />
             </View>
-            <View style={styles.alinear}>
-            <SelectDropdown
-                style={styles.borrar}
-                data={TYPES}
-
-                onSelect={(selectItem, index) => {
-                    console.log(selectItem, index)
-                }}
-                defaultButtonText={'Movimiento'}
-            />
-             <TextInput placeholder='hola'/>
-        </View>
-
-
         </View>
 
     )
@@ -39,20 +43,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         flexDirection: 'row'
     },
-    alinear: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        borderColor: 'blue',
-        borderWidth: 2
-    },
+   
     borde: {
+       
         borderColor: 'red',
         borderWidth: 2
     },
     borrar: {
-        margin: 0,
+        justifyContent: 'space-around',
+        flexDirection: 'row',
         borderColor: 'blue',
-        borderWidth: 2,
+        borderWidth: 2 
 
     }
 });
