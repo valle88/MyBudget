@@ -1,50 +1,53 @@
+import { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+
+import Prueba from './components/Prueba';
+import Principal from './components/Principal';
 import Descripcion from './components/Descripcion';
-import Lista from './components/Lista';
 
 
 export default function App() {
-
+  const [total, setTotal] = useState(0);
   return (
     <View style={styles.container}>
       <View style={styles.tamaño}>
-        <TextInput>Tu saldo actual es: </TextInput>
+        <TextInput onChangeText={setTotal}>Tu saldo actual es: {total}€  </TextInput>
       </View>
-      <View style={styles.concepto}>
-      <Descripcion />
-     
-      </View> 
-      <View style={styles.concepto}>
-        <Lista/>
-      </View>    
+      <View >
+        <Principal />
+      </View>
     </View>
-    
+
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#AED6F1',
     alignItems: 'center',
-    marginTop: 50,
-    margin:20,
     height: '10%',
-    width: '90%',
-
+    padding: 10,
+    width: '100%',
+    backgroundColor: '#ffeeff'
   },
-  tamaño:{
-    margin:20,
+  tamaño: {
+    marginTop: 60,
     height: '10%',
     width: '90%',
     justifyContent: 'center',
     borderColor: 'blue',
-    borderWidth:2,
-    borderRadius:16
+    borderWidth: 2,
+    borderRadius: 16
   },
-  concepto:{
+  concepto: {
     width: '90%',
+    margin: 20,
     borderColor: 'green',
-    borderWidth:2
-  }
+    borderWidth: 2,
+    backgroundColor: '#e1bee7',
+
+
+  },
+
 });
