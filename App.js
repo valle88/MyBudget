@@ -10,12 +10,14 @@ export default function App() {
   const [total, setTotal] = useState(0);
   const [products, setProducts]= useState([]);
   
-  const addProductHandler = (prodType,importe, concepto)=>{
+  const addProductHandler = (prodType,importe, concepto,fecha)=>{
     const newProduct={
       id: uuid.v4(),
       name: concepto,
       cantidad: importe,
-      type: prodType
+      type: prodType,
+      fecha: fecha
+      
     };
     setProducts(()=>[...products,newProduct]);
   };

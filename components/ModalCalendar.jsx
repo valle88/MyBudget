@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, SafeAreaView } from "react-native";
 import CalendarPicker from 'react-native-calendar-picker';
 
-const ModalCalendar = () => {
+const ModalCalendar = ({endDate}) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
+    const endDate = selectedEndDate ? selectedEndDate.toString() : '';
     
     const onDateChange = (date, type) => {
         if (type === 'END_DATE') {
@@ -89,7 +90,7 @@ const ModalCalendar = () => {
                 style={[styles.button, styles.buttonOpen]}
                 onPress={() => setModalVisible(true)}
             >
-                <Text style={styles.textStyle}>{selectedEndDate ? selectedEndDate.toString() : 'fecha'}</Text>
+                <Text style={styles.textStyle}>fecha</Text>
             </Pressable>
         </View>
     );
