@@ -1,10 +1,17 @@
-import {StyleSheet, Text, View } from "react-native";
+import {Pressable, StyleSheet, Text, View } from "react-native";
 import react from "react";
 
-const Lista =()=>{
+const Lista =({prodId, concepto, cantidad,productType, onProductRemove})=>{
+    
+    
+    
     return(
         <View style= {styles.lista}>
-            <Text>hola</Text>
+            <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(prodId)}/>
+            <Pressable style={{flexDirection: 'row'}} onPress={()=> onProductRemove(concepto)}/>
+            <Pressable style={{flexDirection: 'row'}} onPress={()=> onProductRemove(cantidad)}/>
+            <Pressable style={{flexDirection: 'row'}} onPress={()=> onProductRemove(productType)}/>
+            
         </View>
     );
 

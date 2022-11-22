@@ -6,8 +6,8 @@ const ModalCalendar = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
+    
     const onDateChange = (date, type) => {
-        //function to handle the date change
         if (type === 'END_DATE') {
             setSelectedEndDate(date);
         } else {
@@ -44,34 +44,34 @@ const ModalCalendar = () => {
                                         maxDate={new Date(2050, 6, 3)}
                                         weekdays={
                                             [
-                                                'Mon',
-                                                'Tue',
-                                                'Wed',
-                                                'Thur',
-                                                'Fri',
-                                                'Sat',
-                                                'Sun'
+                                                'Lunes',
+                                                'Mart',
+                                                'Mier',
+                                                'Jue',
+                                                'Vier',
+                                                'Sab',
+                                                'Dom'
                                             ]}
                                         months={[
-                                            'January',
-                                            'Febraury',
-                                            'March',
-                                            'April',
-                                            'May',
-                                            'June',
-                                            'July',
-                                            'August',
-                                            'September',
-                                            'October',
-                                            'November',
-                                            'December',
+                                            'Enero',
+                                            'Febrero',
+                                            'Marzo',
+                                            'Abril',
+                                            'Mayo',
+                                            'Junio',
+                                            'Julio',
+                                            'Agosto',
+                                            'Septiembre',
+                                            'Octubre',
+                                            'Noviembre',
+                                            'Diciembre',
                                         ]}
                                         previousTitle="<"
                                         nextTitle=">"
-                                        todayBackgroundColor="#e6ffe6"
-                                        selectedDayColor="#66ff3"
-                                        selectedDayTextColor="#000000"
-                                        scaleFactor={700}
+                                        todayBackgroundColor="#FFFFFF"
+                                        selectedDayColor="#E1F5F3"
+                                        selectedDayTextColor="# 66ff3"
+                                        scaleFactor={500}
                                         textStyle={{
                                             color: '#000000',
                                         }}
@@ -89,7 +89,7 @@ const ModalCalendar = () => {
                 style={[styles.button, styles.buttonOpen]}
                 onPress={() => setModalVisible(true)}
             >
-                <Text style={styles.textStyle}>Fecha</Text>
+                <Text style={styles.textStyle}>{selectedEndDate ? selectedEndDate.toString() : 'fecha'}</Text>
             </Pressable>
         </View>
     );
@@ -136,8 +136,22 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     modalText: {
-        marginBottom: 15,
+        marginBottom: 10,
         textAlign: "center"
-    }
+    },
+    container: {
+        
+        paddingTop: 10,
+        backgroundColor: '#ffffff',
+        padding: 10,
+      },
+      textStyle: {
+        marginTop: 10,
+      },
+      titleStyle: {
+        textAlign: 'center',
+        fontSize: 30,
+        margin: 20,
+      },
 });
 export default ModalCalendar;

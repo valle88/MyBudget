@@ -1,20 +1,64 @@
 import { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-
-import Prueba from './components/Prueba';
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import Principal from './components/Principal';
-import Descripcion from './components/Descripcion';
+import uuid from 'react-native-uuid';
+
+
 
 
 export default function App() {
   const [total, setTotal] = useState(0);
+  const [products, setProducts]= useState([]);
+  
+  const addProductHandler = (prodType,importe, concepto)=>{
+    const newProduct={
+      id: uuid.v4(),
+      name: concepto,
+      cantidad: importe,
+      type: prodType
+    };
+    setProducts(()=>[...products,newProduct]);
+  };
+
+  const removeProductHandler = (id)=>{
+    setProducts(()=> products.filter(product => product.id !== id));
+  };
+
+  const removeAllProductsHandler = (id, boughtValue)=>{
+    const newProduct = products.map(product=>{
+      if(product.id === id){
+        return{
+          ...product,
+          bougth: !boughtValue
+        }
+       
+      }
+      return product;
+    });
+    setProducts(newProduct);
+  };
+
+  
+ 
+
+ 
   return (
     <View style={styles.container}>
       <View style={styles.tamaño}>
         <TextInput onChangeText={setTotal}>Tu saldo actual es: {total}€  </TextInput>
+        
       </View>
       <View >
-        <Principal />
+       
+        <Principal onProductAdd={addProductHandler} />
+        
+      </View>
+      <View>
+        
+        <FlatList
+        data= {products}/>
+        
+      
       </View>
     </View>
 

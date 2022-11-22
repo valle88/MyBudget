@@ -21,7 +21,8 @@
     "react-native-date-picker": "^4.2.6",
     "react-native-datetimepicker-modal": "^1.0.1",
     "react-native-modal-datetime-picker": "^7.6.1",
-    "react-native-select-dropdown": "^3.0.2"
+    "react-native-select-dropdown": "^3.0.2",
+    "react-native-uuid": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
