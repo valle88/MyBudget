@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { FlatList, ScrollView, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
 import uuid from 'react-native-uuid';
 import ListItem from './components/ListItem';
 import Balance from './components/Balance';
@@ -11,18 +11,23 @@ export default function App() {
   const [total, setTotal] = useState(0);
   const [products, setProducts] = useState([]);
 
-  const addProductHandler = (prodType, importe, concepto, enDate) => {
+  useEffect(() => {
+    let count = 0;
+    products.forEach((producto) => {
+      count += Number(producto.cantidad);
+    })
+    setTotal(count);
+  }, [total, products])
+
+  const addProductHandler = (concepto, importe, prodType) => {
     const newProduct = {
       id: uuid.v4(),
       name: concepto,
       cantidad: importe,
-      type: prodType,
-      fecha: enDate
-
+      type: prodType
     };
-    
-    setProducts(() => [...products, newProduct]); 
-    
+
+    setProducts(() => [...products, newProduct]);
   };
 
   const removeProductHandler = (id) => {
@@ -42,44 +47,37 @@ export default function App() {
     });
     setProducts(newProduct);
   };
-  //hacer funcion gaastos
+  //hacer funcion gastos
 
-  const ingresas=()=>{
+  const ingresas = () => {
     if (produtType === 'ingresos') {
-       const res = total + importe
-       return res
-    }else  if (productType === 'gasto') {
-      res = total- importe
-    
+      const res = total + importe
+      return res
+    } else if (productType === 'gasto') {
+      res = total - importe
+
     }
     return res;
   }
-
+  const renderItem = ({ item }) => (
+    <ListItem title={item.title} />
+  );
   return (
     <View style={styles.container}>
       <View style={styles.tamaño}>
-        <TextInput onChangeText={setTotal}>Tu saldo actual es: {ingresas}€  </TextInput>
-        <ListItem/>
+        <TextInput onChangeText={setTotal}>Tu saldo actual es: {total}€  </TextInput>
       </View>
       <View >
         <Balance onProductAdd={addProductHandler} />
-        <ScrollView>
-          <View>
-            {
-              products.length == 0
-              ?<Text>Ninguna movimiento</Text>
-              :products.map(product =>(
-                <ListItem 
-                key={product.id}
-                concepto={product.concepto}
-                cantidad={product.cantidad}
-                productType={product.type}
-                enDate={product.enDate}
-                />
-              ))
-            }
-          </View>
-        </ScrollView>
+      </View>
+      <View>
+        <SafeAreaView style={styles.container1}>
+          <FlatList
+            data={products}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        </SafeAreaView>
       </View>
     </View>
   );
@@ -109,6 +107,19 @@ const styles = StyleSheet.create({
     borderColor: 'green',
     borderWidth: 2,
     backgroundColor: '#e1bee7',
+  },
+  container1: {
+    flex: 1,
+    
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
   },
 
 });

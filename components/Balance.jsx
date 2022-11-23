@@ -20,19 +20,20 @@ const Balance = ({onProductAdd}) => {
   const changeTypeHandler = (value) =>{
       setProdType(value);
   }
-  const changeImporteHandler = (value)=>{
+  const changeImporteHandler = (value) =>{
       setImporte(value);
   }
 
   const addProductHandle =()=>{
       concepto.length > 20
-          ? alert('te has escedido de caracteres')
-          : onProductAdd(concepto,prodType,importe);
+          ? alert('te has excedido de caracteres')
+          : onProductAdd(concepto,importe,prodType);
   
       setConcepto('');
       setImporte(0);
       setProdType('category...')
   }
+  
 
   const isDisabled=()=>{
       const sanitizedName = concepto.trim();
@@ -67,8 +68,8 @@ const Balance = ({onProductAdd}) => {
                 onChangeText={changeTextHandler} />
                 <TextInput placeholder='Importe' 
                 keyboardType={'number-pad'} 
-                initValue={importe}
-                onChange={value => changeImporteHandler(value)}/>
+                onChangeText={changeImporteHandler}
+             />
 
             </View>
             <View style={styles.direccion}>
