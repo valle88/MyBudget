@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import uuid from 'react-native-uuid';
 import ListItem from './components/ListItem';
 import Balance from './components/Balance';
@@ -63,6 +63,23 @@ export default function App() {
       </View>
       <View >
         <Balance onProductAdd={addProductHandler} />
+        <ScrollView>
+          <View>
+            {
+              products.length == 0
+              ?<Text>Ninguna movimiento</Text>
+              :products.map(product =>(
+                <ListItem 
+                key={product.id}
+                concepto={product.concepto}
+                cantidad={product.cantidad}
+                productType={product.type}
+                enDate={product.enDate}
+                />
+              ))
+            }
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
