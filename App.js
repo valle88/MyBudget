@@ -59,7 +59,7 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.tamaño}>
         <Text>Tu saldo actual es:</Text>
-        <Text style={handleBalanceStyle()} onChangeText={setTotal}>{total}€  </Text>
+        <Text style={handleBalanceStyle()}>{total}€  </Text>
       </View>
       <View >
         <Balance onProductAdd={addProductHandler} />
