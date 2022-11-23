@@ -25,9 +25,16 @@ const Balance = ({onProductAdd}) => {
   }
 
   const addProductHandle =()=>{
-      concepto.length > 20
-          ? alert('te has excedido de caracteres')
-          : onProductAdd(concepto,importe,prodType);
+
+      if (concepto.length > 20) {
+        alert('te has excedido de caracteres');
+      }
+      else if (prodType === 'Gastos') {
+        onProductAdd(concepto,importe*(-1),prodType);
+      }
+      else {
+        onProductAdd(concepto,importe,prodType);
+      }
   
       setConcepto('');
       setImporte(0);
@@ -44,9 +51,10 @@ const Balance = ({onProductAdd}) => {
       return true;
   };
 
-
-
-
+  const onPressAddHandle = () => {
+    addProductHandle();
+    setModalVisible(!modalVisible);
+  }
 
   return (
     <View style={styles.centeredView}>
@@ -98,7 +106,7 @@ const Balance = ({onProductAdd}) => {
             <View>
                 <Button style={styles.button1}
                     title="Añadir"
-                    onPress={addProductHandle}
+                    onPress={onPressAddHandle}
                     disabled={isDisabled()}
                 />
             </View>
