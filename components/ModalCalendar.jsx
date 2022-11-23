@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, SafeAreaView } from "react-native";
 import CalendarPicker from 'react-native-calendar-picker';
 
-const ModalCalendar = ({endDate}) => {
+const ModalCalendar = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
@@ -116,17 +116,21 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 2
     },
     button: {
-        borderRadius: 20,
+        borderRadius: 0,
+        marginLeft: 10,
         padding: 10,
         elevation: 2
     },
     buttonOpen: {
-        backgroundColor: "#F194FF",
-        margin: 2,
-        padding: 14
+        borderColor: 'white',
+        borderWidth: 2,
+        paddingRight: 9,
+        margin:1
+        
+       
     },
     buttonClose: {
         backgroundColor: "#2196F3",

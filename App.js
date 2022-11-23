@@ -1,70 +1,70 @@
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
-import Principal from './components/Principal';
 import uuid from 'react-native-uuid';
+import ListItem from './components/ListItem';
+import Balance from './components/Balance';
 
 
 
 
 export default function App() {
   const [total, setTotal] = useState(0);
-  const [products, setProducts]= useState([]);
-  
-  const addProductHandler = (prodType,importe, concepto,fecha)=>{
-    const newProduct={
+  const [products, setProducts] = useState([]);
+
+  const addProductHandler = (prodType, importe, concepto, enDate) => {
+    const newProduct = {
       id: uuid.v4(),
       name: concepto,
       cantidad: importe,
       type: prodType,
-      fecha: fecha
-      
+      fecha: enDate
+
     };
-    setProducts(()=>[...products,newProduct]);
+    
+    setProducts(() => [...products, newProduct]); 
+    
   };
 
-  const removeProductHandler = (id)=>{
-    setProducts(()=> products.filter(product => product.id !== id));
+  const removeProductHandler = (id) => {
+    setProducts(() => products.filter(product => product.id !== id));
   };
 
-  const removeAllProductsHandler = (id, boughtValue)=>{
-    const newProduct = products.map(product=>{
-      if(product.id === id){
-        return{
+  const removeAllProductsHandler = (id, boughtValue) => {
+    const newProduct = products.map(product => {
+      if (product.id === id) {
+        return {
           ...product,
           bougth: !boughtValue
         }
-       
+
       }
       return product;
     });
     setProducts(newProduct);
   };
+  //hacer funcion gaastos
 
-  
- 
+  const ingresas=()=>{
+    if (produtType === 'ingresos') {
+       const res = total + importe
+       return res
+    }else  if (productType === 'gasto') {
+      res = total- importe
+    
+    }
+    return res;
+  }
 
- 
   return (
     <View style={styles.container}>
       <View style={styles.tamaño}>
-        <TextInput onChangeText={setTotal}>Tu saldo actual es: {total}€  </TextInput>
-        
+        <TextInput onChangeText={setTotal}>Tu saldo actual es: {ingresas}€  </TextInput>
+        <ListItem/>
       </View>
       <View >
-       
-        <Principal onProductAdd={addProductHandler} />
-        
-      </View>
-      <View>
-        
-        <FlatList
-        data= {products}/>
-        
-      
+        <Balance onProductAdd={addProductHandler} />
       </View>
     </View>
-
-
   );
 }
 
@@ -92,8 +92,6 @@ const styles = StyleSheet.create({
     borderColor: 'green',
     borderWidth: 2,
     backgroundColor: '#e1bee7',
-
-
   },
 
 });
