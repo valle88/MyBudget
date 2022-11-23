@@ -47,11 +47,19 @@ export default function App() {
     });
     setProducts(newProduct);
   };
-  
+
+  const handleBalanceStyle = () => {
+    if (total >= 0) {
+      return styles.greenBalance;
+    }
+    return styles.redBalance;
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.tamaño}>
-        <TextInput onChangeText={setTotal}>Tu saldo actual es: {total}€  </TextInput>
+        <Text>Tu saldo actual es:</Text>
+        <Text style={handleBalanceStyle()} onChangeText={setTotal}>{total}€  </Text>
       </View>
       <View >
         <Balance onProductAdd={addProductHandler} />
@@ -85,7 +93,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderColor: 'blue',
     borderWidth: 2,
-    borderRadius: 16
+    borderRadius: 16,
+    alignItems: 'center',
+   
   },
   concepto: {
     width: '90%',
@@ -107,5 +117,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
   },
-
+  redBalance: {
+    color: 'red',
+    fontSize:32
+  },
+  greenBalance: {
+    color: 'green',
+    fontSize:32
+  }
 });
